@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 60%;
+            margin: 30px auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 9px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 90px;
+            resize: vertical;
+        }
+
+        .button-row {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn {
+            padding: 9px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn-save {
+            background-color: #2e7d32;
+        }
+
+        .btn-cancel {
+            background-color: #777;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Add Product</h1>
+
+    <form th:action="@{/products/save}" th:object="${product}" method="post">
+
+        <label for="productName">Product Name</label>
+        <input type="text" id="productName" th:field="*{productName}" required>
+
+        <label for="category">Category</label>
+        <input type="text" id="category" th:field="*{category}" required>
+
+        <label for="quantity">Quantity</label>
+        <input type="number" id="quantity" th:field="*{quantity}" min="0" required>
+
+        <label for="price">Price</label>
+        <input type="number" id="price" th:field="*{price}" step="0.01" min="0" required>
+
+        <label for="supplier">Supplier</label>
+        <input type="text" id="supplier" th:field="*{supplier}" required>
+
+        <label for="description">Description</label>
+        <textarea id="description" th:field="*{description}"></textarea>
+
+        <div class="button-row">
+            <button type="submit" class="btn btn-save">Save Product</button>
+            <a th:href="@{/products}" class="btn btn-cancel">Cancel</a>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>
