@@ -7,9 +7,9 @@ Clone or pull the latest version of the project from GitHub.
 
 Open the project in IntelliJ IDEA.
 
-Make sure MySQL is installed and running.
+Make sure your AWS RDS MySQL database is created and running.
 
-In MySQL Workbench, create the database with this command:
+In MySQL Workbench, connect to your RDS database and run:
 
 CREATE DATABASE IF NOT EXISTS inventorydb;
 
@@ -17,26 +17,30 @@ In IntelliJ, open this file:
 
 src/main/resources/application.properties
 
-Add your own MySQL password to this line:
+Update the following values with your AWS RDS credentials:
 
+spring.datasource.url=jdbc:mysql://clcinventorydb.c52c0ykeye01.us-east-2.rds.amazonaws.com:3306/inventorydb
+spring.datasource.username=admin
 spring.datasource.password=
 
-Example:
+Add your RDS password to this line:
 
 spring.datasource.password=yourpasswordhere
 
-Do not push your personal MySQL password to GitHub.
+Do not push your database password to GitHub.
 
-The project is currently set to use the root MySQL user:
+Make sure the application is set to run on port 5000:
 
-spring.datasource.username=root
+server.port=5000
 
-If your MySQL username is different, update that line too.
+Build the project:
 
-Run the Spring Boot application from IntelliJ.
+mvn clean package -DskipTests
 
-Once it starts, open this in your browser:
+Deploy the generated .jar file to AWS Elastic Beanstalk.
 
-http://localhost:8080/products
+Once deployed, open your AWS application URL in a browser:
+
+http://your-elastic-beanstalk-url/products
 
 The inventory app should load from there. You should be able to add, view, edit, and delete products.
